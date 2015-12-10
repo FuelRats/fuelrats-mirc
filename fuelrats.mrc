@@ -1,28 +1,33 @@
 menu nicklist {
   FuelRats
-  .$iif(%fr_client == $1,$style(1)) Set Client:{
-    set %fr_client $1
-    echo -a Client set to %fr_client
-  }
+  .$iif(%fr_client == $1,$style(1)) Set as client
+  ..$iif(%fr_client == $1 && %fr_client_os == pc,$style(1)) PC: set_client_and_os $1 pc
+  ..$iif(%fr_client == $1 && %fr_client_os == x,$style(1)) Xbox: set_client_and_os $1 x
   .$iif(%fr_client == $null,$style(2)) {
     Clear Client: unset %fr_client
     echo -a Client cleared
   }
-  .$iif(%fr_dispatch == $1, $style(1)) Dispatch: {
+  .$iif(%fr_dispatch == $1, $style(1)) Set as dispatch: {
     set %fr_dispatch $1
     echo -a Dispatch set to $1
   }
-  .Assign to %fr_client : {
-    msg $chan !assign %fr_client $1-
-  }
+  .Assign to %fr_client : msg $chan !assign %fr_client $1-
+  .On emergency O2?: msg $chan $1 $+ : Are you on emergency oxygen? (Is there a blue timer in the top-right of your screen?)
+  .Grab last message: msg $chan !grab $1
+}
+
+alias set_client_and_os {
+  set %fr_client $1
+  set %fr_client_os $2
+  echo -a Client set to %fr_client %fr_client_os
 }
 
 menu channel {
   %fr_client
   .Prep: msg $chan !prep %fr_client
-  .Send Friend Request: msg $chan !pcfr %fr_client
-  .Send Wing Request: msg $chan !pcwr %fr_client
-  .Enable Beacon: msg $chan !pcbeacon %fr_client
+  .Send Friend Request: msg $chan ! $+ %fr_client_os $+ fr %fr_client
+  .Send Wing Request: msg $chan ! $+ %fr_client_os $+ wr %fr_client
+  .Enable Beacon: msg $chan ! $+ %fr_client_os $+ beacon %fr_client
   . -
   .$iif(%fr_client == null, $style(2)) Unset client: {
     unset %fr_client
@@ -48,7 +53,7 @@ menu channel {
   .Tell dispatch: msg $chan %fr_dispatch $+ : %fr_client is now CR!
   .And tell client to quit: {
     msg $chan %fr_dispatch $+ : %fr_client is now CR!
-    msg $chan !pcexit %fr_client
+    msg $chan ! $+ %fr_client_os $+ exit %fr_client
   }
   ..Tell mechasqueek: msg $chan !inject %fr_client Case Red
   -
