@@ -1,22 +1,20 @@
 menu nicklist {
   FuelRats
+  .On emergency O2?: msg $chan $1 $+ : Are you on emergency oxygen? (Is there a blue timer in the top-right of your screen?)
+  .PC or Xbox?: msg $chan $1 $+ : Are you on PC or Xbox?
+  .System?: msg $chan $1 $+ : What system are you in?
+  . -
   .$iif(%fr_client == $1,$style(1)) Set as client
-  ..$iif(%fr_client == $1 && %fr_client_os == pc,$style(1)) PC: set_client_and_os $1 pc
-  ..$iif(%fr_client == $1 && %fr_client_os == x,$style(1)) Xbox: set_client_and_os $1 x
-  .$iif(%fr_client == $null,$style(2)) {
-    Clear Client: unset %fr_client
-    echo -a Client cleared
-  }
+  ..$iif(%fr_client == $1 && %fr_client_os == pc,$style(3)) PC: set_client_and_os $1 pc
+  ..$iif(%fr_client == $1 && %fr_client_os == x,$style(3)) Xbox: set_client_and_os $1 x
   .$iif(%fr_dispatch == $1, $style(1)) Set as dispatch: {
     set %fr_dispatch $1
     echo -a Dispatch set to $1
   }
+  . -
   .Assign to %fr_client : msg $chan !assign %fr_client $1-
-  .On emergency O2?: msg $chan $1 $+ : Are you on emergency oxygen? (Is there a blue timer in the top-right of your screen?)
-  .PC or Xbox?: msg $chan $1 $+ : Are you on PC or Xbox?
-  .System?: msg $chan $1 $+ : What system are you in?
   .Grab last message: msg $chan !grab $1
-  -
+  . -
   .Ratsignal!: msg $chan !inject ratsignal $1
 }
 

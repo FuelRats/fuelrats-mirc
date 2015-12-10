@@ -40,14 +40,14 @@ Once dispatch is set, thier name will be shown as a menu and will provide many c
 These are the message formats sent:
 - `<client>`
   - prep: `!prep <client>`
-  - Send Friend Request: `!pcfr <client>`
-  - Send Wing Invite: `!pcwr <client>`
-  - Enable Beacon: `!beacon <client`
+  - Send Friend Request: `!<hardware>fr <client>`
+  - Send Wing Invite: `!<hardware>wing <client>`
+  - Enable Beacon: `!<hardware>beacon <client`
 - `<dispatch>`
-  - Received Friend Request: `<dispatch>: FR+ <client>`
-  - No Friend Request: `<dispatch>: FR- <client>`
-  - Received Wing Request: `<dispatch>: WR+ <client>`
-  - No Wing Request: `<dispatch>: WR- <client>`
+  - Received Friend Request: `<dispatch>: Friend request received from <client>`
+  - No Friend Request: `<dispatch>: No friend request from <client>`
+  - Received Wing Request: `<dispatch>: Wing request received from <client>`
+  - No Wing Request: `<dispatch>: No wing request from <client>`
   - Refueling `<client>`: `<dispatch>: refueling <client>`
   - Paperwork filed: `<dispatch>: <client> paperwork filed`
 - Case Red
