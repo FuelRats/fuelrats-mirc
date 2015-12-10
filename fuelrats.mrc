@@ -60,24 +60,25 @@ menu channel {
   ..Tell mechasqueek: msg $chan !inject %fr_client Case Red
   -
   mechasqueak[BOT]
-  .List Cases: msg $chan !list
-  .List Inactive: msg $chan !list -i
-  .Get info for
-  ..0: msg $chan !quote 0
-  ..1: msg $chan !quote 1
-  ..2: msg $chan !quote 2
-  ..3: msg $chan !quote 3
-  ..4: msg $chan !quote 4
-  .Close case
-  ..0: msg $chan !clear 0
-  ..1: msg $chan !clear 1
-  ..2: msg $chan !clear 2
-  ..3: msg $chan !clear 3
-  ..4: msg $chan !clear 4
-  .Current Case ( $+ %fr_client $+ )
+  .%fr_client
   ..Toggle active: msg $chan !active %fr_client
   ..Quote: msg $chan !quote %fr_client
   ..Close: msg $chan !clear %fr_client
+  .-
+  .List Cases: msg $chan !list
+  .List Inactive: msg $chan !list -i
+  .Get info for
+  ..$submenu($case_info_menu($1))
+  .Close case
+  ..$submenu($case_close_menu($1))
+}
+
+alias case_info_menu {
+  if ($1 <= 15) return Case $calc($1 - 1) : msg $chan !quote $calc($1 - 1)
+}
+
+alias case_close_menu {
+  if ($1 <= 15) return Case $calc($1 - 1) : msg $chan !clear $calc($1 - 1)
 }
 
 on *:NICK: {
