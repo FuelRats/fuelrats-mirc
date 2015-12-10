@@ -4,11 +4,17 @@
 - Tracks who is currently acting dispatch
 - Tracks your current client
 - Gives quick menus to send the most common statements to client or dispatch
-- Adds quick interactions for mechasqueak (our IRC bot) 
+- Adds quick interactions for mechasqueak (our IRC bot)
+
+## Installation
+1. Open mIRC
+1. Open the scripts editor (Tools -> Scripts Editor)
+1. Load the script (File -> Load ...)
+1. Click `Ok` to close the editor
 
 ## Usage
 ### Selecting dispatch and client
-First, you need to identify the player who is currently dispatch. You do this by right-clicking the user's nickname (in the channel or in the nicklist). 
+First, you need to identify the player who is currently dispatch. You do this by right-clicking the user's nickname (in the channel or in the nicklist).
 
 Next, you will need to select your current client.
 
@@ -46,9 +52,9 @@ These are the message formats sent:
   - Paperwork filed: `<dispatch>: <client> paperwork filed`
 - Case Red
   - Tell dispatch: `<dispatch>: <client> is now CR!`
-  - And tell client to quit: 
+  - And tell client to quit:
     1. `<dispatch>: <client> is now CR!`
-    2. `!pcexit <client>` 
+    2. `!pcexit <client>`
   - Tell mechasqueek: `!inject <client> Case Red`
 - mechasqueak[BOT]
   - List Cases: `!list`
