@@ -4,13 +4,16 @@ menu nicklist {
     set %fr_client $1
     echo -a Client set to %fr_client
   }
-  .$iif(%fr_client == $null,$style(2)) { 
+  .$iif(%fr_client == $null,$style(2)) {
     Clear Client: unset %fr_client
     echo -a Client cleared
   }
   .$iif(%fr_dispatch == $1, $style(1)) Dispatch: {
     set %fr_dispatch $1
     echo -a Dispatch set to $1
+  }
+  .Assign to %fr_client : {
+    msg $chan !assign %fr_client $1-
   }
 }
 
