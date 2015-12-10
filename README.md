@@ -63,5 +63,5 @@ These are the message formats sent:
     - 0: `!quote 0`
     - 1: `!quote 1`
   - Close case
-  - 0: `!clear 0`
-  - 1: `!clear 1`
+    - 0: `!clear 0`
+    - 1: `!clear 1`
