@@ -17,9 +17,9 @@ menu nicklist {
 menu channel {
   %fr_client
   .Prep: msg $chan !prep %fr_client
-  .Friend Request: msg $chan !pcfr %fr_client
-  .Wing Request: msg $chan !pcwr %fr_client
-  .Beacon: msg $chan !pcbeacon %fr_client
+  .Send Friend Request: msg $chan !pcfr %fr_client
+  .Send Wing Request: msg $chan !pcwr %fr_client
+  .Enable Beacon: msg $chan !pcbeacon %fr_client
   . -
   .$iif(%fr_client == null, $style(2)) Unset client: {
     unset %fr_client
@@ -33,6 +33,9 @@ menu channel {
   .Received Wing Request: msg $chan %fr_dispatch $+ : WR+ %fr_client
   .No Wing Request: msg $chan %fr_dispatch $+ : WR- %fr_client
   . -
+  .Refueling %fr_client : msg $chan %fr_dispatch $+ : Refueling %fr_client
+  .Paperwork filed: msg $chan %fr_dispatch $+ : %fr_client paperwork filed
+  . -
   .Unset dispatch: {
     unset %fr_dispatch
     echo -a Dispatch unset
@@ -45,8 +48,8 @@ menu channel {
     msg $chan !pcexit %fr_client
   }
   ..Tell mechasqueek: msg $chan !inject %fr_client Case Red
-
-  Bot
+  -
+  mechasqueak[BOT]
   .List Cases: msg $chan !list
   .List Inactive: msg $chan !list -i
   .Get info for
@@ -65,4 +68,15 @@ menu channel {
   ..Toggle active: msg $chan !active %fr_client
   ..Quote: msg $chan !quote %fr_client
   ..Close: msg $chan !clear %fr_client
+}
+
+on *:NICK: {
+  if ($nick === %fr_client) {
+    set %fr_client $newnick
+    echo -a Changed current client nick to $newnick
+  }
+  if ($nick === %fr_dispatch) {
+    set %fr_dispatch $newnick
+    echo -a Changed dispatch nick to $newnick
+  }
 }
