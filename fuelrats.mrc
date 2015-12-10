@@ -13,7 +13,11 @@ menu nicklist {
   }
   .Assign to %fr_client : msg $chan !assign %fr_client $1-
   .On emergency O2?: msg $chan $1 $+ : Are you on emergency oxygen? (Is there a blue timer in the top-right of your screen?)
+  .PC or Xbox?: msg $chan $1 $+ : Are you on PC or Xbox?
+  .System?: msg $chan $1 $+ : What system are you in?
   .Grab last message: msg $chan !grab $1
+  -
+  .Ratsignal!: msg $chan !inject ratsignal $1
 }
 
 alias set_client_and_os {
@@ -26,7 +30,7 @@ menu channel {
   %fr_client
   .Prep: msg $chan !prep %fr_client
   .Send Friend Request: msg $chan ! $+ %fr_client_os $+ fr %fr_client
-  .Send Wing Request: msg $chan ! $+ %fr_client_os $+ wr %fr_client
+  .Send Wing Request: msg $chan ! $+ %fr_client_os $+ wing %fr_client
   .Enable Beacon: msg $chan ! $+ %fr_client_os $+ beacon %fr_client
   . -
   .$iif(%fr_client == null, $style(2)) Unset client: {
@@ -35,11 +39,11 @@ menu channel {
   }
 
   %fr_dispatch
-  .Received Friend Request: msg $chan %fr_dispatch $+ : FR+ %fr_client
-  .No Friend Request: msg $chan %fr_dispatch $+ : FR+ %fr_client
+  .Received Friend Request: msg $chan %fr_dispatch $+ : Friend request received from %fr_client
+  .No Friend Request: msg $chan %fr_dispatch $+ : No friend request from %fr_client
   . -
-  .Received Wing Request: msg $chan %fr_dispatch $+ : WR+ %fr_client
-  .No Wing Request: msg $chan %fr_dispatch $+ : WR- %fr_client
+  .Received Wing Request: msg $chan %fr_dispatch $+ : Wing request received from %fr_client
+  .No Wing Request: msg $chan %fr_dispatch $+ : No wing request from %fr_client
   . -
   .Refueling %fr_client : msg $chan %fr_dispatch $+ : Refueling %fr_client
   .Paperwork filed: msg $chan %fr_dispatch $+ : %fr_client paperwork filed
