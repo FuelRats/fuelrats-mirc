@@ -44,10 +44,10 @@ menu channel {
   .On my way: msg $chan %fr_dispatch $+ : On my way to %fr_client
   .+System+: msg $chan %fr_dispatch $+ : sys+ %fr_client
   .-
-  .+Recieved Friend Request+: msg $chan %fr_dispatch $+ : fr+ %fr_client
+  .+Received Friend Request+: msg $chan %fr_dispatch $+ : fr+ %fr_client
   .-No Friend Request-: msg $chan %fr_dispatch $+ : fr- %fr_client
   . -
-  .+Recieved Wing Request+: msg $chan %fr_dispatch $+ : wr+ %fr_client
+  .+Received Wing Request+: msg $chan %fr_dispatch $+ : wr+ %fr_client
   .-No Wing Request-: msg $chan %fr_dispatch $+ : wr- %fr_client
   . -
   .+Beacon in place+: msg $chan %fr_dispatch $+ : bc+ %fr_client
