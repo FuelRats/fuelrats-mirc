@@ -39,7 +39,7 @@ menu channel {
   }
 
   %fr_dispatch
-  .Rogger: msg $chan Roger that %fr_dispatch
+  .Roger: msg $chan Roger that %fr_dispatch
   .Ready: msg $chan Ready %fr_dispatch
   .On my way: msg $chan %fr_dispatch $+ : On my way to %fr_client
   .+System+: msg $chan %fr_dispatch $+ : sys+ %fr_client
