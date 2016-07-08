@@ -26,28 +26,38 @@ alias set_client_and_os {
 
 menu channel {
   %fr_client
+  .KgbFoam: msg $chan !kgbfoam %fr_client
+  .-
   .Prep: msg $chan !prep %fr_client
   .Send Friend Request: msg $chan ! $+ %fr_client_os $+ fr %fr_client
   .Send Wing Request: msg $chan ! $+ %fr_client_os $+ wing %fr_client
   .Enable Beacon: msg $chan ! $+ %fr_client_os $+ beacon %fr_client
-  . -
+  .-
   .$iif(%fr_client == null, $style(2)) Unset client: {
     unset %fr_client
     echo -a Client cleared
   }
 
   %fr_dispatch
-  .+Friend Request+: msg $chan %fr_dispatch $+ : fr+ %fr_client
+  .Rogger: msg $chan Roger that %fr_dispatch
+  .Ready: msg $chan Ready %fr_dispatch
+  .On my way: msg $chan %fr_dispatch $+ : On my way to %fr_client
+  .+System+: msg $chan %fr_dispatch $+ : sys+ %fr_client
+  .-
+  .+Recieved Friend Request+: msg $chan %fr_dispatch $+ : fr+ %fr_client
   .-No Friend Request-: msg $chan %fr_dispatch $+ : fr- %fr_client
   . -
-  .+Wing Request+: msg $chan %fr_dispatch $+ : wr+ %fr_client
+  .+Recieved Wing Request+: msg $chan %fr_dispatch $+ : wr+ %fr_client
   .-No Wing Request-: msg $chan %fr_dispatch $+ : wr- %fr_client
   . -
-  .Received Wing Request: msg $chan %fr_dispatch $+ : Wing request received from %fr_client
-  . -
+  .+Beacon in place+: msg $chan %fr_dispatch $+ : bc+ %fr_client
+  .-No Beacon-: msg $chan %fr_dispatch $+ : bc- %fr_client
+  .-
+  .+Position+: msg $chan %fr_dispatch $+ : pos+ %fr_client
+  .-No Instance-: msg $chan %fr_dispatch $+ : intance- %fr_client
+  .-
   .Refueling %fr_client : msg $chan %fr_dispatch $+ : Refueling %fr_client
-  .Debriefing done: msg $chan %fr_dispatch $+ : db+ %fr_client
-  .Paperwork filed: msg $chan %fr_dispatch $+ : pw+ %fr_client
+  .db+pw+ %fr_client: msg $chan %fr_dispatch $+ : db+pw+ %fr_client
   . -
   .Unset dispatch: {
     unset %fr_dispatch
