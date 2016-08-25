@@ -38,28 +38,28 @@ menu channel {
     echo -a Client cleared
   }
 
-  %fr_dispatch
-  .Roger: msg $chan Roger that %fr_dispatch
-  .Ready: msg $chan Ready %fr_dispatch
-  .On my way: msg $chan %fr_dispatch $+ : On my way to %fr_client
-  .+System+: msg $chan %fr_dispatch $+ : sys+ %fr_client
+  Dispatch
+  .Rogger: msg $chan Roger that
+  .Ready: msg $chan Ready
+  .On my way: msg $chan On my way to %fr_client
+  .+System+: msg $chan sys+ %fr_client
   .-
-  .+Received Friend Request+: msg $chan %fr_dispatch $+ : fr+ %fr_client
-  .-No Friend Request-: msg $chan %fr_dispatch $+ : fr- %fr_client
+  .+Recieved Friend Request+: msg $chan fr+ %fr_client
+  .-No Friend Request-: msg $chan fr- %fr_client
   . -
-  .+Received Wing Request+: msg $chan %fr_dispatch $+ : wr+ %fr_client
-  .-No Wing Request-: msg $chan %fr_dispatch $+ : wr- %fr_client
+  .+Recieved Wing Request+: msg $chan wr+ %fr_client
+  .-No Wing Request-: msg $chan wr- %fr_client
   . -
-  .+Beacon in place+: msg $chan %fr_dispatch $+ : bc+ %fr_client
-  .-No Beacon-: msg $chan %fr_dispatch $+ : bc- %fr_client
+  .+Beacon in place+: msg $chan bc+ %fr_client
+  .-No Beacon-: msg $chan bc- %fr_client
   .-
-  .+Position+: msg $chan %fr_dispatch $+ : pos+ %fr_client
-  .-No Instance-: msg $chan %fr_dispatch $+ : intance- %fr_client
+  .+Position+: msg $chan pos+ %fr_client
+  .-No Instance-: msg $chan instance- %fr_client
   .-
-  .Refueling %fr_client : msg $chan %fr_dispatch $+ : Refueling %fr_client
-  .db+pw+ %fr_client: msg $chan %fr_dispatch $+ : db+pw+ %fr_client
+  .Refueling %fr_client : msg $chan Refueling %fr_client
+  .db+pw+ %fr_client: msg $chan db+pw+ %fr_client
   . -
-  .Unset dispatch: {
+  .Unset dispatch %fr_dispatch: {
     unset %fr_dispatch
     echo -a Dispatch unset
   }
