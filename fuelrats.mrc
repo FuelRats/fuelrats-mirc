@@ -15,7 +15,7 @@ menu nicklist {
   .Assign to %fr_client : msg $chan !assign %fr_client $1-
   .Grab last message: msg $chan !grab $1
   . -
-  .Ratsignal!: msg $chan !inject ratsignal $1
+  .Ratsignal!: msg $chan !inject $1 ratsignal %fr_client_os
 }
 
 alias set_client_and_os {
@@ -26,27 +26,40 @@ alias set_client_and_os {
 
 menu channel {
   %fr_client
+  .KgbFoam: msg $chan !kgbfoam %fr_client
+  .-
   .Prep: msg $chan !prep %fr_client
   .Send Friend Request: msg $chan ! $+ %fr_client_os $+ fr %fr_client
   .Send Wing Request: msg $chan ! $+ %fr_client_os $+ wing %fr_client
   .Enable Beacon: msg $chan ! $+ %fr_client_os $+ beacon %fr_client
-  . -
+  .-
   .$iif(%fr_client == null, $style(2)) Unset client: {
     unset %fr_client
     echo -a Client cleared
   }
 
-  %fr_dispatch
-  .Received Friend Request: msg $chan %fr_dispatch $+ : Friend request received from %fr_client
-  .No Friend Request: msg $chan %fr_dispatch $+ : No friend request from %fr_client
+  Dispatch
+  .Rogger: msg $chan Roger that
+  .Ready: msg $chan Ready
+  .On my way: msg $chan On my way to %fr_client
+  .+System+: msg $chan sys+ %fr_client
+  .-
+  .+Recieved Friend Request+: msg $chan fr+ %fr_client
+  .-No Friend Request-: msg $chan fr- %fr_client
   . -
-  .Received Wing Request: msg $chan %fr_dispatch $+ : Wing request received from %fr_client
-  .No Wing Request: msg $chan %fr_dispatch $+ : No wing request from %fr_client
+  .+Recieved Wing Request+: msg $chan wr+ %fr_client
+  .-No Wing Request-: msg $chan wr- %fr_client
   . -
-  .Refueling %fr_client : msg $chan %fr_dispatch $+ : Refueling %fr_client
-  .Paperwork filed: msg $chan %fr_dispatch $+ : %fr_client paperwork filed
+  .+Beacon in place+: msg $chan bc+ %fr_client
+  .-No Beacon-: msg $chan bc- %fr_client
+  .-
+  .+Position+: msg $chan pos+ %fr_client
+  .-No Instance-: msg $chan instance- %fr_client
+  .-
+  .Refueling %fr_client : msg $chan Refueling %fr_client
+  .db+pw+ %fr_client: msg $chan db+pw+ %fr_client
   . -
-  .Unset dispatch: {
+  .Unset dispatch %fr_dispatch: {
     unset %fr_dispatch
     echo -a Dispatch unset
   }
@@ -57,9 +70,9 @@ menu channel {
     msg $chan %fr_dispatch $+ : %fr_client is now CR!
     msg $chan ! $+ %fr_client_os $+ exit %fr_client
   }
-  ..Tell mechasqueek: msg $chan !inject %fr_client Case Red
+  ..Tell RatSqueak: msg $chan !codered %fr_client Case Red
   -
-  mechasqueak[BOT]
+  RatSqueak[BOT]
   .%fr_client
   ..Toggle active: msg $chan !active %fr_client
   ..Quote: msg $chan !quote %fr_client
@@ -73,12 +86,52 @@ menu channel {
   ..$submenu($case_close_menu($1))
 }
 
+menu query {
+  %fr_client
+  . -
+  .$iif(%fr_client == null, $style(2)) Unset client: {
+    unset %fr_client
+    echo -a Client cleared
+  }
+
+  %fr_dispatch
+  . -
+  .Unset dispatch: {
+    unset %fr_dispatch
+    echo -a Dispatch unset
+  }
+  -
+  Case Red
+  ..Tell RatSqueak: query RatSqueak[BOT] !codered %fr_client Case Red
+  -
+  RatSqueak[BOT]
+  .%fr_client
+  ..Toggle active: query RatSqueak[BOT] !active %fr_client
+  ..Quote: query RatSqueak[BOT] !quote %fr_client
+  ..Close: query RatSqueak[BOT] !clear %fr_client
+  .-
+  .List Cases:query RatSqueak[BOT] !list
+  .List Inactive: query RatSqueak[BOT] !list -i
+  .Get info for
+  ..$submenu($case_info_menuq($1))
+  .Close case
+  ..$submenu($case_close_menuq($1))
+}
+
 alias case_info_menu {
-  if ($1 <= 15) return Case $calc($1 - 1) : msg $chan !quote $calc($1 - 1)
+  if ($1 <= 10) return Case $calc($1 - 1) : msg $chan !quote $calc($1 - 1)
 }
 
 alias case_close_menu {
-  if ($1 <= 15) return Case $calc($1 - 1) : msg $chan !clear $calc($1 - 1)
+  if ($1 <= 10) return Case $calc($1 - 1) : msg $chan !clear $calc($1 - 1)
+}
+
+alias case_info_menuq {
+  if ($1 <= 10) return Case $calc($1 - 1) : query RatSqueak[BOT] !quote $calc($1 - 1)
+}
+
+alias case_close_menuq {
+  if ($1 <= 10) return Case $calc($1 - 1) : query RatSqueak[BOT] !clear $calc($1 - 1)
 }
 
 on *:NICK: {
